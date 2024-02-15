@@ -17,11 +17,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" data-theme='winter'>
+    <html lang="en" data-theme='winter' >
       <body className={inter.className}>
         <NavBar />
         
-        <main className="p-5">
+        <main className="p-5" suppressHydrationWarning={true}>
             {children}
         </main>
       </body>
