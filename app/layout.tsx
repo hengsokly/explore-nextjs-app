@@ -27,7 +27,7 @@ export default function RootLayout({
           <main className="p-5" suppressHydrationWarning={true}>
               {children}
           </main>
-          </AuthProvider>
+        </AuthProvider>
       </body>
     </html>
   );

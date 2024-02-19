@@ -31,9 +31,9 @@ const RegisterPage = () => {
         throw new Error(`Error: ${response.statusText}`);
       }
 
-      const dd = await response.json();
+      const body = await response.json();
       // const data = await response.json();
-      console.log('Registration successful:', dd);
+      console.log('Registration successful:', body);
       // Handle successful registration (e.g., redirect to login page)
     } catch (error) {
       console.log(error);
@@ -81,14 +81,9 @@ const RegisterPage = () => {
             <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
               Register
             </button>
-
-            <a className="inline-block align-baseline font-bold text-sm text-blue-500 hover:text-blue-800" href="#">
-              Forgot Password?
-            </a>
           </div>
-
-          
         </form>
+
         <p className="text-center text-gray-500 text-xs">
           &copy;2020 Acme Corp. All rights reserved.
         </p>
