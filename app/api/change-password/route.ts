@@ -9,7 +9,7 @@ import { z } from "zod";
 
 const schema = z.object({
   currentPassword: z.string().min(6),
-  password: z.string().min(6)
+  newPassword: z.string().min(6)
 })
 
 export async function POST(request: NextRequest) {

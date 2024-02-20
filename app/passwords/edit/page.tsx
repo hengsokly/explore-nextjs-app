@@ -1,5 +1,6 @@
 'use client';
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from 'next/navigation';
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from 'zod';
@@ -17,10 +18,12 @@ const passwordSchema = z
   });
 
 const ChangePasswordForm = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: zodResolver(passwordSchema),
   });
   const [submitting, setSubmitting] = useState(false);
+
+  const router = useRouter();
 
   const onSubmit = async (data) => {
     setSubmitting(true);
@@ -36,6 +39,8 @@ const ChangePasswordForm = () => {
         throw new Error("Failed to change password");
       }
 
+      reset();
+      router.push('/users');
       console.log("Password changed successfully!");
     } catch (error) {
       console.error(error);

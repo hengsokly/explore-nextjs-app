@@ -3,6 +3,8 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import React from 'react'
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { useRouter } from 'next/navigation';
+import { signIn } from "next-auth/react";
 
 const userSchema = z.object({
   name: z.string().min(3, 'Name must be at least 3 characters long'),
@@ -15,9 +17,11 @@ const userSchema = z.object({
 });
 
 const RegisterPage = () => {
-  const { register, handleSubmit, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm({
     resolver: zodResolver(userSchema),
   });
+
+  const router = useRouter();
 
   const onSubmit = async (data) => {
     try {
@@ -31,10 +35,14 @@ const RegisterPage = () => {
         throw new Error(`Error: ${response.statusText}`);
       }
 
-      const body = await response.json();
-      // const data = await response.json();
-      console.log('Registration successful:', body);
+      // const body = await response.json();
+      await signIn("credentials", { redirect: false, email: data.email, password: data.password });
+      
       // Handle successful registration (e.g., redirect to login page)
+      router.push('/users')
+
+      // console.log('Registration successful:', body);
+      
     } catch (error) {
       console.log(error);
       // setError(error.message);
