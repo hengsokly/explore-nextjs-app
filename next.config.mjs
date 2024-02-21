@@ -1,6 +1,16 @@
 import {withSentryConfig} from '@sentry/nextjs';
 /** @type {import('next').NextConfig} */
-const nextConfig = {};
+const nextConfig = {
+  // code here for register remote image domain
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'bit.ly',
+      },
+    ],
+  },
+};
 
 export default withSentryConfig(nextConfig, {
 // For all available options, see:
