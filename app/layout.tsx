@@ -5,6 +5,19 @@ import NavBar from "./NavBar";
 import { Suspense } from "react";
 import { SessionProvider } from "next-auth/react";
 import AuthProvider from "./auth/Provider";
+import { Roboto } from "next/font/google";
+import localFont from "next/font/local";
+
+const roboto = Roboto({
+  subsets: ['latin'],
+  weight: ['400', '500']
+})
+
+// Custom font
+const poppins = localFont({
+  src: '../public/fonts/poppins-regular-webfont.woff2',
+  variable: '--font-poppins'
+})
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,7 +33,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" data-theme='winter' >
-      <body className={inter.className}>
+      <body className={poppins.variable} >
         <AuthProvider>
           <NavBar />
           
