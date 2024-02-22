@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import ProductCard from "./components/ProductCard";
-import { authOptions } from "./api/auth/[...nextauth]/route";
+import { authOptions } from "./api/auth/authOption";
 import { getServerSession } from "next-auth";
 import khmerImage from "@/public/images/khmer.png";
 import pixabay from "@/public/images/pixabay.jpg";

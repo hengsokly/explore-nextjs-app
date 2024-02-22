@@ -17,15 +17,17 @@ const passwordSchema = z
     path: ["confirmPassword"],
   });
 
+type passwordSchemaType = z.infer<typeof passwordSchema>;
+
 const ChangePasswordForm = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<passwordSchemaType>({
     resolver: zodResolver(passwordSchema),
   });
   const [submitting, setSubmitting] = useState(false);
 
   const router = useRouter();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     setSubmitting(true);
     // Send data to your backend for password change (replace with your logic)
     
@@ -61,7 +63,8 @@ const ChangePasswordForm = () => {
               id="currentPassword"
               {...register("currentPassword")}
             />
-            {errors.currentPassword && <p className="text-red-500 text-xs italic">{errors.currentPassword.message}</p>}
+            
+            { errors.currentPassword && <p className="text-red-500 text-xs italic">{errors.currentPassword?.message}</p> }
           </div>
 
           <div className="mb-4">

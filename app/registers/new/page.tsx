@@ -16,14 +16,16 @@ const userSchema = z.object({
   path: ["confirmPassword"],
 });
 
+type userSchemaType = z.infer<typeof userSchema>;
+
 const RegisterPage = () => {
-  const { register, handleSubmit, reset, formState: { errors } } = useForm({
+  const { register, handleSubmit, reset, formState: { errors } } = useForm<userSchemaType>({
     resolver: zodResolver(userSchema),
   });
 
   const router = useRouter();
 
-  const onSubmit = async (data) => {
+  const onSubmit = async (data: any) => {
     try {
       const response = await fetch('/api/register', {
         method: 'POST',
